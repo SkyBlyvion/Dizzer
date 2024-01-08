@@ -11,7 +11,7 @@ services:
     build: 
       context: ./php
     ports:
-      - '9001:9000'
+      - '9000:9000'
     environment:
       TZ: UTC
     volumes:
@@ -24,8 +24,8 @@ services:
     container_name: nginxdizzer
     image: nginx:stable-alpine
     ports:
-      - '8080:80'
-      - '4443:443'
+      - '80:80'
+      - '443:443'
     environment:
       TZ: UTC
     volumes:
@@ -49,7 +49,7 @@ services:
       MYSQL_USER: dizzeruser
       MYSQL_PASSWORD: dizzer2024
     ports:
-      - '3308:3306'
+      - '3307:3306'
     volumes:
       - maria:/var/lib/mysql
 
