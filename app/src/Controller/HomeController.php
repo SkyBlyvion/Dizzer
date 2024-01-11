@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    #[Route("/home", name: "accueil")]
+    #[Route("/accueil", name: "accueil")]
     public function home()
     {
         // $lien = "<a href='page/2'>liens vers la page 2</a>";
@@ -26,9 +26,10 @@ class HomeController extends AbstractController
         return new Response($this->html("Bienvenue sur la page", "page", $numPage));
     }
 
+    #[Route("/about", name: "about")]
     public function aboutbook()
     {
-        return new Response("C'est à propos des livres !!");
+        return $this->render("home/about.html.twig", []);
     }
 
     /**

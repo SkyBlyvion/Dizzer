@@ -1,8 +1,16 @@
 {# Mon premier fichier twig #}
 {% extends "base.html.twig" %}
 
-{% block title %}Mon accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block body %}
-<h2>Bienvenue dans l'accueil</h2>
+	
+
+	<div class="image-container">
+		<img src="{{ asset('images/1920DreamTheater.jpg') }}" alt="Pochette DreamTheater">
+	</div>
+
+	<h2>Bienvenue dans l'accueil</h2>
+
 {% endblock %}
