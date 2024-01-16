@@ -5,16 +5,23 @@
 {% endblock %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('css/mon.css') }}">
+	<link rel="stylesheet" href="{{ asset("css/mon.css") }}" />
+
 {% endblock %}
 
 {% block body %}
-	<div class="image-container">
-		<div class="background-image"></div>
-		<div class="position-relative">
-			<div
-				class="sidebar position-absolute">
-				<!-- Contenu de la sidebar -->
+<style>
+    .image-container {
+        background-image: url('{{ asset('images/1920DreamTheater.jpg') }}');
+        background-size: cover;
+        background-position: center;
+    }
+</style>
+
+<div class="image-container">
+    <div class="background-image"></div>
+    <div class="sidebar">
+        
 				<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
 					<symbol id="bootstrap" viewbox="0 0 118 94">
 						<title>Bootstrap</title>
@@ -108,9 +115,9 @@
 
 
 				</div>
-			</div>
-		</div>
-	</div>
+
+    </div>
+</div>
 
 
 {% endblock %}
