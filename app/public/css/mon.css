@@ -1,20 +1,62 @@
 
-    .image-container {
-        
-		background-image: url('/images/1920DreamTheater.jpg');
-        background-size: cover;
-        background-position: center;
-        width: 100vw;
-        height: 700px;
-    }
-
+.image-container {
+    
+    background-image: url('/images/1920DreamTheater.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    height: 575px;
+}
 
 .sidebar {
     position: absolute;
     top: 75px;
     left: 0;
     width: 72px;
-    height: 50%;
+    height: 100%;
     background-color: rgba(255, 255, 255, 0.8);
-    
 }
+
+
+.image-container-3imgs {
+    width: 100%;
+    height: 100%;
+    position: top;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: rgba(0, 0, 0, 0.5);
+} 
+
+.image-container-3imgs .image-wrapper {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.image-container-3imgs .image-wrapper img {
+    width: 300px;
+    height: 300px;
+}
+
+.image-container-3imgs .image-wrapper .image-label {
+    margin-top: 10px;
+    color: black;
+    font-size: 30px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+.image-container-3imgs .discover-label {
+    margin-top: 20px;
+    color: black;
+    font-size: 30px;
+    font-family: Inter;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+
+
+
