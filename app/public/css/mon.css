@@ -1,12 +1,20 @@
 
+    .image-container {
+        
+		background-image: url('/images/1920DreamTheater.jpg');
+        background-size: cover;
+        background-position: center;
+        width: 100vw;
+        height: 700px;
+    }
+
+
 .sidebar {
     position: absolute;
-    top: 0;
+    top: 75px;
     left: 0;
-    width: 200px;
-    /* Ajustez la largeur de la sidebar selon vos besoins */
-    height: 100%;
-    /* Ajustez la hauteur de la sidebar selon vos besoins */
+    width: 72px;
+    height: 50%;
     background-color: rgba(255, 255, 255, 0.8);
-    /* Ajustez la couleur de fond de la sidebar selon vos besoins */
+    
 }
