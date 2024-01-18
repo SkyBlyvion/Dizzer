@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class HomeController extends AbstractController
 {
@@ -18,6 +20,19 @@ class HomeController extends AbstractController
 
         return $this->render("home/home.html.twig", []);
     }
+
+    #[Route("/discover", name: "discover")]
+    public function contact()
+    {
+        return $this->render("home/discover.html.twig", []);
+    }
+
+    #[Route("/playlist", name: "playlist")]
+    public function contactbook()
+    {
+        return $this->render("home/playlist.html.twig", []);
+    }
+
 
     #[Route("/page/{numPage}", name: "page")]
     public function page(string $numPage)
@@ -46,4 +61,22 @@ class HomeController extends AbstractController
         return $html;
     }
     
+    #[Route("/error", name: "error")]
+    public function error(Request $request)
+    {
+        return $this->render('error.html.twig', [
+            'msg' => $request->get('message')
+        ]);
+    }
+
+    #[Route("/login", name: "login", methods: ["GET", "POST"])]
+    public function login(AuthenticationUtils $authenticationUtils)
+    {
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastMail = $authenticationUtils->getLastUsername();
+        return $this->render("form/login.html.twig", [
+            "lastMail" => $lastMail,
+            "error" => $error
+        ]);
+    }
 }
