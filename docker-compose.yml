@@ -1,7 +1,7 @@
 version: '3.8'
 
 volumes:
-  maria:
+  mariadizzer:
 
 services:
 
@@ -11,7 +11,7 @@ services:
     build: 
       context: ./php
     ports:
-      - '9000:9000'
+      - '9001:9000'
     environment:
       TZ: UTC
     volumes:
@@ -49,9 +49,9 @@ services:
       MYSQL_USER: dizzeruser
       MYSQL_PASSWORD: dizzer2024
     ports:
-      - '3307:3306'
+      - '3308:3306'
     volumes:
-      - maria:/var/lib/mysql
+      - mariadizzer:/var/lib/mysql
 
   # container NODEJS
   dizzernode:
