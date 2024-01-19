@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArtistRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
@@ -16,11 +18,17 @@ class Artist
     #[ORM\Column(length: 255)]
     private ?string $Name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Pictures = null;
+    #[ORM\OneToMany(mappedBy: 'Artist', targetEntity: Albums::class)]
+    private Collection $albums;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Tracks = null;
+    #[ORM\ManyToMany(targetEntity: Tracks::class, inversedBy: 'artists')]
+    private Collection $Tracks;
+
+    public function __construct()
+    {
+        $this->albums = new ArrayCollection();
+        $this->Tracks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -39,26 +47,56 @@ class Artist
         return $this;
     }
 
-    public function getPictures(): ?string
+    /**
+     * @return Collection<int, Albums>
+     */
+    public function getAlbums(): Collection
     {
-        return $this->Pictures;
+        return $this->albums;
     }
 
-    public function setPictures(string $Pictures): static
+    public function addAlbum(Albums $album): static
     {
-        $this->Pictures = $Pictures;
+        if (!$this->albums->contains($album)) {
+            $this->albums->add($album);
+            $album->setArtist($this);
+        }
 
         return $this;
     }
 
-    public function getTracks(): ?string
+    public function removeAlbum(Albums $album): static
+    {
+        if ($this->albums->removeElement($album)) {
+            // set the owning side to null (unless already changed)
+            if ($album->getArtist() === $this) {
+                $album->setArtist(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tracks>
+     */
+    public function getTracks(): Collection
     {
         return $this->Tracks;
     }
 
-    public function setTracks(string $Tracks): static
+    public function addTrack(Tracks $track): static
     {
-        $this->Tracks = $Tracks;
+        if (!$this->Tracks->contains($track)) {
+            $this->Tracks->add($track);
+        }
+
+        return $this;
+    }
+
+    public function removeTrack(Tracks $track): static
+    {
+        $this->Tracks->removeElement($track);
 
         return $this;
     }

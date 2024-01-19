@@ -14,67 +14,68 @@ class Albums
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Title = null;
+    private ?string $AlbumName = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Pictures = null;
+    private ?string $AlbumTitle = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Tracks = null;
+    private ?string $AlbumType = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Genres = null;
+    #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'albums')]
+    private ?Artist $Artist = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getAlbumName(): ?string
     {
-        return $this->Title;
+        return $this->AlbumName;
     }
 
-    public function setTitle(string $Title): static
+    public function setAlbumName(string $AlbumName): static
     {
-        $this->Title = $Title;
+        $this->AlbumName = $AlbumName;
 
         return $this;
     }
 
-    public function getPictures(): ?string
+    public function getAlbumTitle(): ?string
     {
-        return $this->Pictures;
+        return $this->AlbumTitle;
     }
 
-    public function setPictures(string $Pictures): static
+    public function setAlbumTitle(string $AlbumTitle): static
     {
-        $this->Pictures = $Pictures;
+        $this->AlbumTitle = $AlbumTitle;
 
         return $this;
     }
 
-    public function getTracks(): ?string
+    public function getAlbumType(): ?string
     {
-        return $this->Tracks;
+        return $this->AlbumType;
     }
 
-    public function setTracks(string $Tracks): static
+    public function setAlbumType(string $AlbumType): static
     {
-        $this->Tracks = $Tracks;
+        $this->AlbumType = $AlbumType;
 
         return $this;
     }
 
-    public function getGenres(): ?string
+    public function getArtist(): ?Artist
     {
-        return $this->Genres;
+        return $this->Artist;
     }
 
-    public function setGenres(string $Genres): static
+    public function setArtist(?Artist $Artist): static
     {
-        $this->Genres = $Genres;
+        $this->Artist = $Artist;
 
         return $this;
     }
+
 }

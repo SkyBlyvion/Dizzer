@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlaylistRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlaylistRepository::class)]
@@ -14,66 +16,59 @@ class Playlist
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Title = null;
+    private ?string $Name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Tracks = null;
+    #[ORM\OneToMany(mappedBy: 'playlist', targetEntity: Tracks::class)]
+    private Collection $Playlist;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Private = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $Public = null;
+    public function __construct()
+    {
+        $this->Playlist = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->Title;
+        return $this->Name;
     }
 
-    public function setTitle(string $Title): static
+    public function setName(string $Name): static
     {
-        $this->Title = $Title;
+        $this->Name = $Name;
 
         return $this;
     }
 
-    public function getTracks(): ?string
+    /**
+     * @return Collection<int, Tracks>
+     */
+    public function getPlaylist(): Collection
     {
-        return $this->Tracks;
+        return $this->Playlist;
     }
 
-    public function setTracks(string $Tracks): static
+    public function addPlaylist(Tracks $playlist): static
     {
-        $this->Tracks = $Tracks;
+        if (!$this->Playlist->contains($playlist)) {
+            $this->Playlist->add($playlist);
+            $playlist->setPlaylist($this);
+        }
 
         return $this;
     }
 
-    public function getPrivate(): ?string
+    public function removePlaylist(Tracks $playlist): static
     {
-        return $this->Private;
-    }
-
-    public function setPrivate(string $Private): static
-    {
-        $this->Private = $Private;
-
-        return $this;
-    }
-
-    public function getPublic(): ?string
-    {
-        return $this->Public;
-    }
-
-    public function setPublic(string $Public): static
-    {
-        $this->Public = $Public;
+        if ($this->Playlist->removeElement($playlist)) {
+            // set the owning side to null (unless already changed)
+            if ($playlist->getPlaylist() === $this) {
+                $playlist->setPlaylist(null);
+            }
+        }
 
         return $this;
     }

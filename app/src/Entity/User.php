@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -14,17 +13,17 @@ class User
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 30)]
-    private ?string $username = null;
-
     #[ORM\Column(length: 255)]
-    private ?string $email = null;
-
-    #[ORM\Column(length: 30)]
-    private ?string $password = null;
+    private ?string $Username = null;
 
     #[ORM\Column]
-    private array $Roles = [];
+    private ?string $Roles = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Email = null;
+
+    #[ORM\Column]
+    private ?string $Password = null;
 
     public function getId(): ?int
     {
@@ -33,51 +32,48 @@ class User
 
     public function getUsername(): ?string
     {
-        return $this->username;
+        return $this->Username;
     }
 
-    public function setUsername(string $username): static
+    public function setUsername(string $Username): static
     {
-        $this->username = $username;
+        $this->Username = $Username;
+
+        return $this;
+    }
+
+    public function getRoles(): ?string
+    {
+        return $this->Roles;
+    }
+
+    public function setRoles(string $Roles): static
+    {
+        $this->Roles = $Roles;
 
         return $this;
     }
 
     public function getEmail(): ?string
     {
-        return $this->email;
+        return $this->Email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $Email): static
     {
-        $this->email = $email;
+        $this->Email = $Email;
 
         return $this;
     }
 
     public function getPassword(): ?string
     {
-        return $this->password;
+        return $this->Password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $Password): static
     {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getRoles(): array
-    {
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $Roles): static
-    {
-        $this->Roles = $Roles;
+        $this->Password = $Password;
 
         return $this;
     }
