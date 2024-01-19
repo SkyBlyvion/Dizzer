@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,11 +19,14 @@ class User
     private ?string $Username = null;
 
     #[ORM\Column]
-    private ?string $Roles = null;
+    private ?array $Roles = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Email = null;
 
+    /**
+     * @var string The hashed password
+     */
     #[ORM\Column]
     private ?string $Password = null;
 
@@ -42,12 +47,29 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
     {
-        return $this->Roles;
+        return (string) $this->Username;
     }
 
-    public function setRoles(string $Roles): static
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->Roles;
+        
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $Roles): static
     {
         $this->Roles = $Roles;
 
@@ -66,6 +88,9 @@ class User
         return $this;
     }
 
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
     public function getPassword(): ?string
     {
         return $this->Password;
@@ -76,5 +101,14 @@ class User
         $this->Password = $Password;
 
         return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }

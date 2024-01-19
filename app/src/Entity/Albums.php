@@ -23,7 +23,7 @@ class Albums
     private ?string $AlbumType = null;
 
     #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'albums')]
-    private ?Artist $Artist = null;
+    private ?Artist $artist = null;
 
     public function getId(): ?int
     {
@@ -68,12 +68,12 @@ class Albums
 
     public function getArtist(): ?Artist
     {
-        return $this->Artist;
+        return $this->artist;
     }
 
-    public function setArtist(?Artist $Artist): static
+    public function setArtist(?Artist $artist): static
     {
-        $this->Artist = $Artist;
+        $this->artist = $artist;
 
         return $this;
     }
