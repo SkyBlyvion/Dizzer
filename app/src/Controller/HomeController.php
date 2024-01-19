@@ -47,20 +47,12 @@ class HomeController extends AbstractController
         return $this->render("home/about.html.twig", []);
     }
 
-    /**
-     * function de construction de la page
-     * @param $titre
-     * @return String
-     */
-
-    private function html($message, $titre, $number = ""): String
+    #[Route("/categories", name: "categories")]
+    public function categories()
     {
-        $html ="<html><head><title>$titre</title></head><body><p>$message</p>"
-        ."<p>$number</p></body></html>";
-
-        return $html;
+        return $this->render("home/categories.html.twig", []);
     }
-    
+
     #[Route("/error", name: "error")]
     public function error(Request $request)
     {
@@ -79,4 +71,20 @@ class HomeController extends AbstractController
             "error" => $error
         ]);
     }
+
+    /**
+     * function de construction de la page
+     * @param $titre
+     * @return String
+     */
+    
+    private function html($message, $titre, $number = ""): String
+    {
+        $html ="<html><head><title>$titre</title></head><body><p>$message</p>"
+        ."<p>$number</p></body></html>";
+    
+        return $html;
+    }
+
+
 }
