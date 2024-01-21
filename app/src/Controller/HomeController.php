@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\AlbumsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -21,10 +22,18 @@ class HomeController extends AbstractController
         return $this->render("home/home.html.twig", []);
     }
 
+    private $albumRepo;
+    public function __construct(AlbumsRepository $albumRepository)
+    {
+        $this->albumRepo = $albumRepository;
+    }
+
     #[Route("/discover", name: "discover")]
     public function contact()
     {
-        return $this->render("home/discover.html.twig", []);
+        return $this->render("home/discover.html.twig", [
+            "albums" => $this->albumRepo->findAll(),
+        ]);
     }
 
     #[Route("/playlist", name: "playlist")]

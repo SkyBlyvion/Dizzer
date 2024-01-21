@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ asset("css/mon.css") }}" />
 {% endblock %}
 {% block body %}
-{# Section 1 / Player#}
+{# Section 1 #}
 <div class="image-container">
    <div class="sidebar">
       <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -72,7 +72,26 @@
          </ul>
       </div>
    </div>
+{# Player #}
+<div class="d-flex justify-content-center">
+  <div id="mobile-box">
+    <!-- Card -->
+    <div class="card">
+      <div class="card-body text-center">
+        <h5 class="h5 font-weight-bold">
+         <p>Artist:<a href="#" target="_blank"> Dream Theater</a></p>
+        </h5>
+        <p class="mb-0">Dystopian Overture</p>
+        <audio controls id="music" preload="true">
+          <source src="{{ asset("audio/DreamTheater-DystopianOverture.mp3") }}" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+    <!-- Card -->
+  </div>
 </div>
+</div>
+
 {# Section 2 / 3 img #}
 <div class="image-container-3imgs">
 
