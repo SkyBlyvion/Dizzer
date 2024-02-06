@@ -28,13 +28,13 @@ class HomeController extends AbstractController
         $this->albumRepo = $albumRepository;
     }
 
-    #[Route("/discover", name: "discover")]
-    public function contact()
-    {
-        return $this->render("home/discover.html.twig", [
-            "albums" => $this->albumRepo->findAll(),
-        ]);
-    }
+    // #[Route("/discover", name: "discover")]
+    // public function contact()
+    // {
+    //     return $this->render("home/discover.html.twig", [
+    //         "albums" => $this->albumRepo->findAll(),
+    //     ]);
+    // }
 
     #[Route("/playlist", name: "playlist")]
     public function contactbook()

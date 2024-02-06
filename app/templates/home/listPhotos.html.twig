@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste d'images{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Recherche d'images</h2>
+    <div class="row">
+        <h4>Formulaire de recherche</h4>
+        
+        <!-- Affiche le formulaire de recherche -->
+        {{ form_start(form) }}
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+        <!-- Fin de l'affichage du formulaire -->
+    </div>
+    <div class="row">
+        <!-- Affiche le résultat de la recherche -->
+        Élement recherché : {{ query }}
+    </div>
+    <div class="row">
+        {% for image in images %}
+            <img class="image-containeres" src="{{ image }}"></img>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
